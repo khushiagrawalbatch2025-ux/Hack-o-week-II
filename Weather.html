@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Panel</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+/* Background Image */
+background-image:url("https://images.unsplash.com/photo-1501973801540-537f08ccae7b");
+background-size:cover;
+background-position:center;
+}
+
+/* Glass Card */
+
+.weather-card{
+width:340px;
+padding:30px;
+text-align:center;
+
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+color:white;
+}
+
+.city{
+font-size:28px;
+font-weight:600;
+}
+
+.date{
+font-size:14px;
+opacity:0.8;
+margin-bottom:15px;
+}
+
+.weather-icon{
+width:110px;
+margin:10px 0;
+}
+
+.temp{
+font-size:48px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.condition{
+font-size:20px;
+margin-bottom:25px;
+}
+
+.details{
+display:flex;
+justify-content:space-between;
+}
+
+.box{
+background:rgba(255,255,255,0.2);
+padding:12px;
+border-radius:12px;
+width:30%;
+}
+
+.label{
+font-size:12px;
+opacity:0.8;
+}
+
+.value{
+font-weight:bold;
+margin-top:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="weather-card">
+
+<div class="city">Nagpur</div>
+<div class="date">Thursday • 5 March</div>
+
+<img class="weather-icon" src="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+
+<div class="temp">32°C</div>
+<div class="condition">Sunny</div>
+
+<div class="details">
+
+<div class="box">
+<div class="label">Humidity</div>
+<div class="value">40%</div>
+</div>
+
+<div class="box">
+<div class="label">Wind</div>
+<div class="value">12 km/h</div>
+</div>
+
+<div class="box">
+<div class="label">Feels Like</div>
+<div class="value">34°C</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
