@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aesthetic Quiz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("https://images.unsplash.com/photo-1523580494863-6f3031224c94") no-repeat center/cover;
+}
+
+.quiz-box{
+    width:520px;
+    padding:25px;
+    border-radius:20px;
+    backdrop-filter:blur(18px);
+    background:rgba(255,255,255,0.15);
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+    color:#fff;
+    text-align:center;
+}
+
+.quiz-box img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.timer{
+    font-size:18px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.option{
+    background:rgba(255,255,255,0.25);
+    padding:10px;
+    margin:8px 0;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#ffffff;
+    color:#333;
+}
+
+button{
+    margin-top:12px;
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#333;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-box">
+    <div class="timer">Time Left: <span id="time">15</span>s</div>
+    <img id="quizImage" src="">
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+</div>
+
+<script>
+const quizData = [
+{
+    question: "Which planet is known as the Red Planet?",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
+    options: ["Earth","Mars","Jupiter","Venus"],
+    answer: "Mars"
+},
+{
+    question: "Which animal is known as the King of the Jungle?",
+    image: "https://images.unsplash.com/photo-1546182990-dffeafbe841d",
+    options: ["Tiger","Elephant","Lion","Leopard"],
+    answer: "Lion"
+},
+{
+    question: "Which language is used to style web pages?",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    options: ["HTML","Python","CSS","C++"],
+    answer: "CSS"
+},
+{
+    question: "Which ocean is the largest?",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    options: ["Indian","Pacific","Atlantic","Arctic"],
+    answer: "Pacific"
+},
+{
+    question: "Which country is famous for the Eiffel Tower?",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+    options: ["Italy","France","Germany","Spain"],
+    answer: "France"
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let timer;
+let timeLeft = 15;
+
+function startTimer(){
+    timeLeft = 15;
+    document.getElementById("time").textContent = timeLeft;
+    timer = setInterval(()=>{
+        timeLeft--;
+        document.getElementById("time").textContent = timeLeft;
+        if(timeLeft <= 0){
+            clearInterval(timer);
+            nextQuestion();
+        }
+    },1000);
+}
+
+function loadQuestion(){
+    clearInterval(timer);
+    const q = quizData[currentQuestion];
+    document.getElementById("question").textContent = q.question;
+    document.getElementById("quizImage").src = q.image;
+
+    const optionsHTML = q.options.map(option =>
+        `<div class="option" onclick="selectOption('${option}')">${option}</div>`
+    ).join("");
+
+    document.getElementById("options").innerHTML = optionsHTML;
+
+    startTimer();
+}
+
+function selectOption(selected){
+    if(selected === quizData[currentQuestion].answer){
+        score++;
+    }
+    nextQuestion();
+}
+
+function nextQuestion(){
+    clearInterval(timer);
+    currentQuestion++;
+    if(currentQuestion < quizData.length){
+        loadQuestion();
+    }else{
+        document.querySelector(".quiz-box").innerHTML =
+        `<h2>Quiz Completed 🎉</h2>
+         <h3>Your Score: ${score}/5</h3>`;
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
